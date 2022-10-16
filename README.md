@@ -30,6 +30,22 @@ Query Options:
 - `title`: series title to search
 - \[TODO\] `order_by`: order by one of the following: TITLE, LATEST_CHAPTER, SOURCE
 
+Example output:
+
+```json
+[
+    ...,
+    {
+        title: ".hack//intermezzo"
+        href:"https://9anime.vc/watch/hackintermezzo-5449"
+        img: "https://img.bunnycdnn.ru/_r/300x400/100/20/06/20068dbb6c6a731c9fb34185…"
+        latestChapter: "1"
+        source: "9animes"
+    },
+    ...
+]
+```
+
 ---
 
 ## Demo
