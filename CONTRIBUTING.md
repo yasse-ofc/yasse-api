@@ -154,7 +154,7 @@ Updating, improving and correcting the documentation
 Use:
 
 - PascalCase for classes;
-- snake_case for crawler names, file names, handler labels;
+- snake_case for file names;
 - SCREAMING_SNAKE_CASE for constants which will never be reassigned or mutated;
 - camelCase for everything else.
 
@@ -171,36 +171,17 @@ Use the following commands to clone the rep and download all packages:
 
 ```bash
 nvm 
-git clone git@github.com:ed-henrique/yasse.git
-git branch dev
-git checkout dev
-git pull upstream dev
-cd yasse/backend && npm i
-cd ../frontend && npm i
-cd ../backend/src/crawlers/cheerio_crawlers && npm i
-cd ../http_crawlers && npm i
-cd ../puppeteer_crawlers && npm i
-cd ../../db && npm i
-cd ../.. && touch .env
+git clone git@github.com:ed-henrique/yasse-api.git
+cd yasse-api && npm i && touch .env
 ```
 
 Set up `.env` file inside the `backend` folder as following:
 
 ```.env
-PROXY_USERNAME=
-PROXY_PASS=
 MONGODB_LINK=
 ```
 
-We are currently working with [Webshare](https://www.webshare.io/) proxies. You can get 10 proxies for free there, and that's enough for testing before submitting your code. To acquire your credentials do as following:
-
-1. Create an account in [Webshare](https://www.webshare.io/);
-2. Go inside your dashboard;
-3. Go to `Proxy > Rotating Proxy`;
-4. Get your `Proxy Username` and `Proxy Password` there and paste them in your `PROXY_USERNAME` and `PROXY_PASS` respectively;
-5. You are ready to go.
-
-For the database, we are using [MongoDB](https://www.mongodb.com/). It's also free, and the step by step to get your link is the following:
+For the database, we are using [MongoDB](https://www.mongodb.com/). It's free, and the step by step to get your link is the following:
 
 1. Create an account in [MongoDB](https://www.mongodb.com/);
 2. Go to `Deployment > Database`;
@@ -210,15 +191,8 @@ For the database, we are using [MongoDB](https://www.mongodb.com/). It's also fr
 6. Select `Connect your application`;
 7. Copy the link given to you and paste it into your `MONGODB_LINK`;
 8. Change the `<password>` field to your created password;
-9. Add the `&keepAlive=true` to the end of your link;
-10. Your link should be looking like this: `mongodb+srv://<user>:<password>@cluster.p2u97.mongodb.net/?retryWrites=true&w=majority&keepAlive=true`;
-11. You are ready to go.
-
-Known ports used in this project:
-
-- `Express API: 3000`
-- `Frontend: 80`
-- `MongoDB: 27017`
+9. Your link should be looking like this: `mongodb+srv://<user>:<password>@cluster.p2u97.mongodb.net/?retryWrites=true&w=majority`;
+10. You are ready to go.
 
 ### Commit Messages
 
