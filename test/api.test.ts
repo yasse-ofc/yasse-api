@@ -1,4 +1,3 @@
-import { doesNotMatch, doesNotReject } from 'assert';
 import { app } from '../src/api';
 const request = require('supertest');
 
@@ -12,10 +11,27 @@ describe('routes', () => {
             });
             
             it('should return some anime', async () => {
-                const animeName = 'charlotte';
+                const animeName = 'one';
 
                 const response = await request(app).get(`/anime?title=${animeName}`);
                 expect(!Object.keys(response.body).length).toBe(false);
+            });
+
+            it('should return a anime list sorted by latest chapter', async () => {
+                const animeName = 'one';
+
+                const response = (await request(app).get(`/anime?title=${animeName}&orderByLatestChapter=true`)).body;
+                
+                let check = false;
+
+                for ( let i = 1; i < response.length; i++ ) {
+                    if ( response[i].latestChapter > response[i - 1].latestChapter ) {
+                        check = true;
+                        break;
+                    }
+                }
+
+                expect(check).toBe(false);
             });
         });
     });
@@ -28,12 +44,28 @@ describe('routes', () => {
                 await request(app).get(`/manga?title=${mangaName}`).expect([]);
             });
 
-
             it('should return some manga', async () => {
-                const mangaName = 'charlotte';
+                const mangaName = 'one';
 
                 const response = await request(app).get(`/manga?title=${mangaName}`);
                 expect(!Object.keys(response.body).length).toBe(false);
+            });
+
+            it('should return a manga list sorted by latest chapter', async () => {
+                const mangaName = 'one';
+
+                const response = (await request(app).get(`/manga?title=${mangaName}&orderByLatestChapter=true`)).body;
+
+                let check = false;
+
+                for ( let i = 1; i < response.length; i++ ) {
+                    if ( response[i].latestChapter > response[i - 1].latestChapter ) {
+                        check = true;
+                        break;
+                    }
+                }
+
+                expect(check).toBe(false);
             });
         });
     });
@@ -48,10 +80,27 @@ describe('routes', () => {
 
             
             it('should return some webtoon', async () => {
-                const webtoonName = 'charlotte';
+                const webtoonName = 'one';
 
                 const response = await request(app).get(`/webtoon?title=${webtoonName}`);
                 expect(!Object.keys(response.body).length).toBe(false);
+            });
+
+            it('should return a webtoon list sorted by latest chapter', async () => {
+                const webtoonName = 'one';
+
+                const response = (await request(app).get(`/webtoon?title=${webtoonName}&orderByLatestChapter=true`)).body;
+
+                let check = false;
+
+                for ( let i = 1; i < response.length; i++ ) {
+                    if ( response[i].latestChapter > response[i - 1].latestChapter ) {
+                        check = true;
+                        break;
+                    }
+                }
+
+                expect(check).toBe(false);
             });
         });
     });
@@ -65,12 +114,9 @@ describe('routes', () => {
             });
 
 
-            it('should return some novel', async () => {
-                const novelName = 'charlotte';
+            it.todo('should return some novel');
 
-                const response = await request(app).get(`/novel?title=${novelName}`);
-                expect(!Object.keys(response.body).length).toBe(false);
-            });
+            it.todo('should return a novel list sorted by latest chapter')
         });
     });
 });

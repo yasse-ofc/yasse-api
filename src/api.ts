@@ -1,32 +1,46 @@
 const express = require('express');
-const { searchDB } =  require('./search_db');
+const { sort } = require('./sort');
+const { searchDB } = require('./search_db');
 
 export const app = express();
-const PORT = 3000;
 
 app.use( express.json() );
 app.use( express.urlencoded({ extended: true }) );
 
-app.get( '/anime', async (req, res) => {
+app.get( '/anime', async ( req, res ) => {
     const title = req.query.title;
-    res.send( await searchDB( title.toString(), 'anime' ));
+    const orderByLatestChapter = req.query.orderByLatestChapter;
+
+    orderByLatestChapter ?
+        res.send( await searchDB( title.toString(), 'anime', true ) ) :
+        res.send( await searchDB( title.toString(), 'anime' ) );
 });
 
-app.get( '/manga', async (req, res) => {
+app.get( '/manga', async ( req, res ) => {
     const title = req.query.title;
-    res.send( await searchDB( title.toString(), 'manga' ));
+    const orderByLatestChapter = req.query.orderByLatestChapter;
+    
+    orderByLatestChapter ?
+        res.send( await searchDB( title.toString(), 'manga', true ) ) :
+        res.send( await searchDB( title.toString(), 'manga' ) );
 });
 
-app.get( '/webtoon', async (req, res) => {
+app.get( '/webtoon', async ( req, res ) => {
     const title = req.query.title;
-    res.send( await searchDB( title.toString(), 'webtoon' ));
+    const orderByLatestChapter = req.query.orderByLatestChapter;
+    
+    orderByLatestChapter ?
+        res.send( await searchDB( title.toString(), 'webtoon', true ) ) :
+        res.send( await searchDB( title.toString(), 'webtoon' ) );
 });
 
-app.get( '/novel', async (req, res) => {
+app.get( '/novel', async ( req, res ) => {
     const title = req.query.title;
-    res.send( await searchDB( title.toString(), 'novel' ));
+    const orderByLatestChapter = req.query.orderByLatestChapter;
+    
+    orderByLatestChapter ?
+        res.send( await searchDB( title.toString(), 'novel', true ) ) :
+        res.send( await searchDB( title.toString(), 'novel' ) );
 });
-
-app.listen( PORT );
 
 module.exports = { app };

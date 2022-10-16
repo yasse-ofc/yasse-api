@@ -28,7 +28,8 @@ WIP
 Query Options:
 
 - `title`: series title to search
-- \[TODO\] `order_by`: order by one of the following: TITLE, LATEST_CHAPTER, SOURCE
+- `OrderByLatestChapter`: order by latest chapter
+- \[TODO\] `orderBy`: order by one of the following: TITLE, LATEST_CHAPTER, SOURCE
 
 Example output:
 
