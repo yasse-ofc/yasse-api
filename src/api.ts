@@ -5,13 +5,26 @@ const app = express();
 const PORT = 3000;
 
 app.use( express.json() );
-app.use( express.urlencoded( { extended: true } ) );
+app.use( express.urlencoded({ extended: true }) );
 
-app.get( '/', async (req, res) => {
-    const data = req.body;
-    res.send( await searchDB( data.searchTerm ?? 'one piece', data.collectionToSearch ?? 'manga' ) );
+app.get( '/anime', async (req, res) => {
+    const title = req.query.title;
+    res.send( await searchDB( title.toString(), 'anime' ));
 });
 
-app.listen( process.env.PORT || PORT, () => {
-    console.log( `Example app listening on port ${ process.env.PORT || PORT }` );
+app.get( '/manga', async (req, res) => {
+    const title = req.query.title;
+    res.send( await searchDB( title.toString(), 'manga' ));
 });
+
+app.get( '/webtoon', async (req, res) => {
+    const title = req.query.title;
+    res.send( await searchDB( title.toString(), 'webtoon' ));
+});
+
+app.get( '/novel', async (req, res) => {
+    const title = req.query.title;
+    res.send( await searchDB( title.toString(), 'novel' ));
+});
+
+app.listen( PORT );
