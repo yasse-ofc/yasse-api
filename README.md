@@ -25,6 +25,11 @@ WIP
 | /webtoon | Webtoon  |
 | /novel   | Novel    |
 
+Query Options:
+
+- `title`: series title to search
+- \[TODO\] `order_by`: order by one of the following: TITLE, LATEST_CHAPTER, SOURCE
+
 ---
 
 ## Demo
