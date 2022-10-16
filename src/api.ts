@@ -3,43 +3,35 @@ const { searchDB } = require('./search_db');
 
 export const app = express();
 
-app.use( express.json() );
-app.use( express.urlencoded({ extended: true }) );
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get( '/anime', async ( req, res ) => {
-    const title = req.query.title;
-    const orderByLatestChapter = req.query.orderByLatestChapter;
+app.get('/anime', async (req, res) => {
+  const title = req.query.title;
+  const orderByLatestChapter = req.query.orderByLatestChapter;
 
-    orderByLatestChapter ?
-        res.send( await searchDB( title.toString(), 'anime', true ) ) :
-        res.send( await searchDB( title.toString(), 'anime' ) );
+  res.send(searchDB(title.toString(), 'anime', !!orderByLatestChapter));
 });
 
-app.get( '/manga', async ( req, res ) => {
-    const title = req.query.title;
-    const orderByLatestChapter = req.query.orderByLatestChapter;
-    
-    orderByLatestChapter ?
-        res.send( await searchDB( title.toString(), 'manga', true ) ) :
-        res.send( await searchDB( title.toString(), 'manga' ) );
+app.get('/manga', async (req, res) => {
+  const title = req.query.title;
+  const orderByLatestChapter = req.query.orderByLatestChapter;
+
+  res.send(searchDB(title.toString(), 'manga', !!orderByLatestChapter));
 });
 
-app.get( '/webtoon', async ( req, res ) => {
-    const title = req.query.title;
-    const orderByLatestChapter = req.query.orderByLatestChapter;
-    
-    orderByLatestChapter ?
-        res.send( await searchDB( title.toString(), 'webtoon', true ) ) :
-        res.send( await searchDB( title.toString(), 'webtoon' ) );
+app.get('/webtoon', async (req, res) => {
+  const title = req.query.title;
+  const orderByLatestChapter = req.query.orderByLatestChapter;
+
+  res.send(searchDB(title.toString(), 'webtoon', !!orderByLatestChapter));
 });
 
-app.get( '/novel', async ( req, res ) => {
-    const title = req.query.title;
-    const orderByLatestChapter = req.query.orderByLatestChapter;
-    
-    orderByLatestChapter ?
-        res.send( await searchDB( title.toString(), 'novel', true ) ) :
-        res.send( await searchDB( title.toString(), 'novel' ) );
+app.get('/novel', async (req, res) => {
+  const title = req.query.title;
+  const orderByLatestChapter = req.query.orderByLatestChapter;
+
+  res.send(searchDB(title.toString(), 'novel', !!orderByLatestChapter));
 });
 
 module.exports = { app };
