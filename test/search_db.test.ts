@@ -1,10 +1,24 @@
 import { searchDB, formatSearch } from '../src/search_db';
 const request = require('supertest');
 
-describe('function testing', () => {
-    it.todo('should return empty list');
+jest.setTimeout(10000);
 
-    it.todo('should return something');
+describe('function testing', () => {
+    it('should return empty list', async () => {
+        const title = 'no series is going to have this ridiculous name';
+        
+        const result = await searchDB( title, 'anime');
+
+        expect( result.length === 0 ).toBe( true );
+    });
+
+    it('should return something', async () => {
+        const title = 'one';
+
+        const result = await searchDB( title, 'anime' );
+
+        expect( result.length === 0 ).toBe( false );
+    });
 
     it('should format search', () => {
         const searchTerm = 'kimetsu no yaiba';

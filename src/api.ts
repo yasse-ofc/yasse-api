@@ -1,5 +1,4 @@
 const express = require('express');
-const { sort } = require('./sort');
 const { searchDB } = require('./search_db');
 
 export const app = express();

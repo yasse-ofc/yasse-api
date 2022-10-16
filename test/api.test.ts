@@ -1,6 +1,8 @@
 import { app } from '../src/api';
 const request = require('supertest');
 
+jest.setTimeout(10000);
+
 describe('routes', () => {
     describe('get anime route', () => {
         describe('given the anime does not exist', () => {
@@ -77,7 +79,6 @@ describe('routes', () => {
 
                 await request(app).get(`/webtoon?title=${webtoonName}`).expect([]);
             });
-
             
             it('should return some webtoon', async () => {
                 const webtoonName = 'one';
@@ -112,7 +113,6 @@ describe('routes', () => {
 
                 await request(app).get(`/novel?title=${novelName}`).expect([]);
             });
-
 
             it.todo('should return some novel');
 
