@@ -1,7 +1,7 @@
-import express from 'express';
-import { searchDB } from './search_db.js';
+const express = require('express');
+const { searchDB } =  require('./search_db');
 
-const app = express();
+export const app = express();
 const PORT = 3000;
 
 app.use( express.json() );
@@ -28,3 +28,5 @@ app.get( '/novel', async (req, res) => {
 });
 
 app.listen( PORT );
+
+module.exports = { app };
