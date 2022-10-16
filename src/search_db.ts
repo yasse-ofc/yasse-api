@@ -1,8 +1,8 @@
-require("dotenv").config();
-const { MongoClient } = require("mongodb");
+require('dotenv').config();
+const { MongoClient } = require('mongodb');
 
-const url = process.env.MONGODB_LINK ?? "";
-const dbName = "yasse";
+const url = process.env.MONGODB_LINK ?? '';
+const dbName = 'yasse';
 
 /**
  * Creates ideal string to make regex search in MongoDB.
@@ -10,11 +10,11 @@ const dbName = "yasse";
  * @return {string} Formatted string.
  */
 export function formatSearch(searchTerm: string): string {
-  if (typeof searchTerm !== "string") {
-    throw new Error("Search term must be a string.");
+  if (typeof searchTerm !== 'string') {
+    throw new Error('Search term must be a string.');
   }
 
-  return searchTerm.split("").join(".*");
+  return searchTerm.split('').join('.*');
 }
 
 /**
@@ -25,8 +25,8 @@ export function formatSearch(searchTerm: string): string {
  * @return List of JSON document with search results.
  */
 export async function searchDB(
-  title: "anime" | "manga" | "webtoon" | "novel",
-  collectionToSearch: string,
+  title: string,
+  collectionToSearch: 'anime' | 'manga' | 'webtoon' | 'novel',
   orderByLatestChapter?: boolean
 ) {
   let client;
@@ -36,7 +36,7 @@ export async function searchDB(
     const collection = db.collection(collectionToSearch);
 
     if (!collection) {
-      throw new Error("Collection not found.");
+      throw new Error('Collection not found.');
     }
 
     const searchResult = await collection.find(
