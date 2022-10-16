@@ -18,20 +18,18 @@ function formatSearch( searchTerm: string ): string {
 }
 
 /** 
-* Searches for searchTerm in collectionToSearch.
-* @param {string} searchTerm - Term to be searched.
+* Searches for title in collectionToSearch.
+* @param {string} title - Term to be searched.
 * @param {string} collectionToSearch - Collection to search.
 * @return List of JSON document with search results.
 */
-export async function searchDB( searchTerm: string, collectionToSearch: string ) {
+export async function searchDB( title: string, collectionToSearch: string ) {
     const client: MongoClient = await MongoClient.connect( url );
     const db = client.db( dbName );
     const collection = db.collection( collectionToSearch );
     
-    console.log('searching...');
-
     const result = await collection.find(
-        { 'title': { $regex: `.*${ formatSearch(searchTerm.toLowerCase()) }.*` } },
+        { 'title': { $regex: `.*${ title.toLowerCase() }.*` } },
         { projection: { _id: 0 } }
     ).toArray();
     
