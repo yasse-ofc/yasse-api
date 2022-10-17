@@ -18,22 +18,22 @@ A free RESTful API to search series (manga, anime, webtoons and novels) from a l
 
 WIP
 
-| Routes   | Output   |
-|:--------:|:--------:|
-| /anime   | Anime    |
-| /manga   | Manga    |
-| /webtoon | Webtoon  |
-| /novel   | Novel    |
+|  Routes  | Output  |
+| :------: | :-----: |
+|  /anime  |  Anime  |
+|  /manga  |  Manga  |
+| /webtoon | Webtoon |
+|  /novel  |  Novel  |
 
 Query Options:
 
-- `title`: series title to search
-- `OrderByLatestChapter`: order by latest chapter
-- \[TODO\] `orderBy`: order by one of the following: TITLE, LATEST_CHAPTER, SOURCE
+-   `title`: series title to search
+-   `OrderByLatestChapter`: order by latest chapter
+-   \[TODO\] `orderBy`: order by one of the following: TITLE, LATEST_CHAPTER, SOURCE
 
 Example output:
 
-```json
+```js
 [
     ...,
     {

@@ -93,13 +93,14 @@ A good bug report shouldn't leave others needing to chase you up for more inform
 #### How Do I Submit a Good Bug Report?
 
 > You must never report security related issues, vulnerabilities or bugs including sensitive information to the issue tracker, or elsewhere in public. Instead sensitive bugs must be sent by email to <yasse.ofc@gmail.com>.
+
 <!-- You may add a PGP key to allow the messages to be sent encrypted as well. -->
 
 We use GitHub issues to track bugs and errors. If you run into an issue with the project:
 
 - Open an [Issue](https://github.com/yasse-ofc/yasse-api/issues/new). (Since we can't be sure at this point whether it is a bug or not, we ask you not to talk about a bug yet and not to label the issue.)
 - Explain the behavior you would expect and the actual behavior.
-- Please provide as much context as possible and describe the *reproduction steps* that someone else can follow to recreate the issue on their own. This usually includes your code. For good bug reports you should isolate the problem and create a reduced test case.
+- Please provide as much context as possible and describe the _reproduction steps_ that someone else can follow to recreate the issue on their own. This usually includes your code. For good bug reports you should isolate the problem and create a reduced test case.
 - Provide the information you collected in the previous section.
 
 Once it's filed:
@@ -136,12 +137,14 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/yasse-
 <!-- You might want to create an issue template for enhancement suggestions that can be used as a guide and that defines the structure of the information to be included. If you do so, reference it here in the description. -->
 
 ### Your First Code Contribution
+
 <!-- TODO
 include Setup of env, IDE and typical getting started instructions?
 
 -->
 
 ### Improving The Documentation
+
 <!-- TODO
 Updating, improving and correcting the documentation
 
@@ -170,7 +173,7 @@ nvm install node
 Use the following commands to clone the rep and download all packages:
 
 ```bash
-nvm 
+nvm
 git clone git@github.com:yasse-ofc/yasse-api-api.git
 cd yasse-api && npm i && touch .env
 ```
