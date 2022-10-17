@@ -1,4 +1,4 @@
-import app from '../src/api';
+import app from '../src/routes';
 import request from 'supertest';
 
 jest.setTimeout(10000);
@@ -14,11 +14,11 @@ describe('routes', () => {
         it('should return some anime', async () => {
             const animeName = 'one';
 
-            const response = await request(app).get(
-                `/anime?title=${animeName}`
-            );
+            const response = (
+                await request(app).get(`/anime?title=${animeName}`)
+            ).body;
 
-            expect(!Object.keys(response.body).length).toBe(false);
+            expect(!Object.keys(response).length).toBe(false);
         });
 
         it('should return a anime list sorted by latest chapter', async () => {
@@ -53,10 +53,10 @@ describe('routes', () => {
         it('should return some manga', async () => {
             const mangaName = 'one';
 
-            const response = await request(app).get(
-                `/manga?title=${mangaName}`
-            );
-            expect(!Object.keys(response.body).length).toBe(false);
+            const response = (
+                await request(app).get(`/manga?title=${mangaName}`)
+            ).body;
+            expect(!Object.keys(response).length).toBe(false);
         });
 
         it('should return a manga list sorted by latest chapter', async () => {
@@ -91,10 +91,11 @@ describe('routes', () => {
         it('should return some webtoon', async () => {
             const webtoonName = 'one';
 
-            const response = await request(app).get(
-                `/webtoon?title=${webtoonName}`
-            );
-            expect(!Object.keys(response.body).length).toBe(false);
+            const response = (
+                await request(app).get(`/webtoon?title=${webtoonName}`)
+            ).body;
+
+            expect(!Object.keys(response).length).toBe(false);
         });
 
         it('should return a webtoon list sorted by latest chapter', async () => {
