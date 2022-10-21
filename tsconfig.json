@@ -2,9 +2,13 @@
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
         "moduleResolution": "node",
-        "module": "ESNEXT",
-        "target": "ESNEXT",
-        "esModuleInterop": true
+        "module": "ES2022",
+        "target": "ES2022",
+        "lib": ["es2020"],
+        "esModuleInterop": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "outDir": "dist"
     },
     "include": ["./src/**/*", "./test/**/*"]
 }

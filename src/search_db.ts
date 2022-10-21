@@ -1,10 +1,4 @@
-import * as dotenv from 'dotenv';
-import { MongoClient } from 'mongodb';
-
-dotenv.config();
-
-const url = process.env.MONGODB_LINK ?? '';
-const dbName = 'yasse';
+import { db } from './connect_db';
 
 /**
  * Creates ideal string to make regex search in MongoDB.
@@ -31,11 +25,8 @@ async function searchDB(
     collectionToSearch: 'anime' | 'manga' | 'webtoon' | 'novel',
     orderByLatestChapter?: boolean
 ) {
-    let client: MongoClient;
     try {
-        client = await MongoClient.connect(url);
-        const db = client.db(dbName);
-        const collection = db.collection(collectionToSearch);
+        const collection = db.db.collection(collectionToSearch);
 
         if (!collection) {
             throw new Error('Collection not found.');
@@ -53,8 +44,6 @@ async function searchDB(
         return result;
     } catch (error) {
         console.error(error);
-    } finally {
-        await client.close();
     }
 }
 

@@ -1,21 +1,30 @@
-import app from '../src/api';
+import router from '../src/routes';
 import request from 'supertest';
+import { db, connectToDatabase } from '../src/connect_db';
 
 jest.setTimeout(10000);
+
+beforeAll(async () => {
+    await connectToDatabase();
+});
+
+afterAll(async () => {
+    await db.client.close();
+});
 
 describe('routes', () => {
     describe('get anime route', () => {
         it('should return an empty list', async () => {
             const animeName = 'no way an anime has this name';
 
-            await request(app).get(`/anime?title=${animeName}`).expect([]);
+            await request(router).get(`/anime?title=${animeName}`).expect([]);
         });
 
         it('should return some anime', async () => {
             const animeName = 'one';
 
             const response = (
-                await request(app).get(`/anime?title=${animeName}`)
+                await request(router).get(`/anime?title=${animeName}`)
             ).body;
 
             expect(!Object.keys(response).length).toBe(false);
@@ -25,7 +34,7 @@ describe('routes', () => {
             const animeName = 'one';
 
             const response = (
-                await request(app).get(
+                await request(router).get(
                     `/anime?title=${animeName}&orderByLatestChapter=true`
                 )
             ).body;
@@ -47,14 +56,14 @@ describe('routes', () => {
         it('should return an empty list', async () => {
             const mangaName = 'no way an manga has this name';
 
-            await request(app).get(`/manga?title=${mangaName}`).expect([]);
+            await request(router).get(`/manga?title=${mangaName}`).expect([]);
         });
 
         it('should return some manga', async () => {
             const mangaName = 'one';
 
             const response = (
-                await request(app).get(`/manga?title=${mangaName}`)
+                await request(router).get(`/manga?title=${mangaName}`)
             ).body;
             expect(!Object.keys(response).length).toBe(false);
         });
@@ -63,7 +72,7 @@ describe('routes', () => {
             const mangaName = 'one';
 
             const response = (
-                await request(app).get(
+                await request(router).get(
                     `/manga?title=${mangaName}&orderByLatestChapter=true`
                 )
             ).body;
@@ -85,14 +94,16 @@ describe('routes', () => {
         it('should return an empty list', async () => {
             const webtoonName = 'no way an webtoon has this name';
 
-            await request(app).get(`/webtoon?title=${webtoonName}`).expect([]);
+            await request(router)
+                .get(`/webtoon?title=${webtoonName}`)
+                .expect([]);
         });
 
         it('should return some webtoon', async () => {
             const webtoonName = 'one';
 
             const response = (
-                await request(app).get(`/webtoon?title=${webtoonName}`)
+                await request(router).get(`/webtoon?title=${webtoonName}`)
             ).body;
 
             expect(!Object.keys(response).length).toBe(false);
@@ -102,7 +113,7 @@ describe('routes', () => {
             const webtoonName = 'one';
 
             const response = (
-                await request(app).get(
+                await request(router).get(
                     `/webtoon?title=${webtoonName}&orderByLatestChapter=true`
                 )
             ).body;
@@ -124,14 +135,14 @@ describe('routes', () => {
         it('should return an empty list', async () => {
             const novelName = 'no way an novel has this name';
 
-            await request(app).get(`/novel?title=${novelName}`).expect([]);
+            await request(router).get(`/novel?title=${novelName}`).expect([]);
         });
 
         it('should return some novel', async () => {
             const novelName = 'one';
 
             const response = (
-                await request(app).get(`/novel?title=${novelName}`)
+                await request(router).get(`/novel?title=${novelName}`)
             ).body;
 
             expect(!Object.keys(response).length).toBe(false);
@@ -141,7 +152,7 @@ describe('routes', () => {
             const novelName = 'one';
 
             const response = (
-                await request(app).get(
+                await request(router).get(
                     `/novel?title=${novelName}&orderByLatestChapter=true`
                 )
             ).body;

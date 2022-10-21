@@ -1,12 +1,21 @@
 import { searchDB, formatSearch } from '../src/search_db';
+import { db, connectToDatabase } from '../src/connect_db';
 
 jest.setTimeout(10000);
+
+beforeAll(async () => {
+    await connectToDatabase();
+});
+
+afterAll(async () => {
+    await db.client.close();
+});
 
 describe('function testing', () => {
     it('should return empty list', async () => {
         const title = 'no series is going to have this ridiculous name';
 
-        const result = await searchDB(title, 'anime');
+        const result = (await searchDB(title, 'anime')) ?? [];
 
         expect(result.length === 0).toBe(true);
     });
@@ -14,7 +23,7 @@ describe('function testing', () => {
     it('should return something', async () => {
         const title = 'one';
 
-        const result = await searchDB(title, 'anime');
+        const result = (await searchDB(title, 'anime')) ?? [];
 
         expect(result.length === 0).toBe(false);
     });

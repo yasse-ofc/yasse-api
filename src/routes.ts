@@ -1,27 +1,27 @@
 import express from 'express';
 import { searchDB } from './search_db';
 
-const app = express();
+const router = express.Router();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
 
-app.get('/anime', async (req, res) => {
+router.get('/anime', async (req, res) => {
     const title = req.query.title ?? '';
     const orderByLatestChapter = req.query.orderByLatestChapter ?? false;
 
     res.send(await searchDB(title.toString(), 'anime', !!orderByLatestChapter));
 });
 
-app.get('/manga', async (req, res) => {
-    const title = req.query.title;
+router.get('/manga', async (req, res) => {
+    const title = req.query.title ?? '';
     const orderByLatestChapter = req.query.orderByLatestChapter;
 
     res.send(await searchDB(title.toString(), 'manga', !!orderByLatestChapter));
 });
 
-app.get('/webtoon', async (req, res) => {
-    const title = req.query.title;
+router.get('/webtoon', async (req, res) => {
+    const title = req.query.title ?? '';
     const orderByLatestChapter = req.query.orderByLatestChapter;
 
     res.send(
@@ -29,11 +29,11 @@ app.get('/webtoon', async (req, res) => {
     );
 });
 
-app.get('/novel', async (req, res) => {
-    const title = req.query.title;
+router.get('/novel', async (req, res) => {
+    const title = req.query.title ?? '';
     const orderByLatestChapter = req.query.orderByLatestChapter;
 
     res.send(await searchDB(title.toString(), 'novel', !!orderByLatestChapter));
 });
 
-export default app;
+export default router;

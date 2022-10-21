@@ -18,6 +18,7 @@
     },
     "scripts": {
         "start": "ts-node-esm -T ./src/server.ts",
+        "connect_test": "ts-node-esm -T ./src/connect_db.ts",
         "test": "jest --detectOpenHandles",
         "test_continuous": "jest --watchAll --detectOpenHandles"
     },
