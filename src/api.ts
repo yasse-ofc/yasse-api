@@ -1,15 +1,39 @@
 import express from 'express';
-import router from './routes.js';
+import { searchDB } from './search_db';
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const PORT = 3000;
+app.get('/anime', async (req, res) => {
+    const title = req.query.title ?? '';
+    const orderByLatestChapter = req.query.orderByLatestChapter ?? false;
 
-app.use('/', router);
-
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+    res.send(await searchDB(title.toString(), 'anime', !!orderByLatestChapter));
 });
+
+app.get('/manga', async (req, res) => {
+    const title = req.query.title;
+    const orderByLatestChapter = req.query.orderByLatestChapter;
+
+    res.send(await searchDB(title.toString(), 'manga', !!orderByLatestChapter));
+});
+
+app.get('/webtoon', async (req, res) => {
+    const title = req.query.title;
+    const orderByLatestChapter = req.query.orderByLatestChapter;
+
+    res.send(
+        await searchDB(title.toString(), 'webtoon', !!orderByLatestChapter)
+    );
+});
+
+app.get('/novel', async (req, res) => {
+    const title = req.query.title;
+    const orderByLatestChapter = req.query.orderByLatestChapter;
+
+    res.send(await searchDB(title.toString(), 'novel', !!orderByLatestChapter));
+});
+
+export default app;

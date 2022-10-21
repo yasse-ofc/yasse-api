@@ -1,4 +1,4 @@
-import app from '../src/routes';
+import app from '../src/api';
 import request from 'supertest';
 
 jest.setTimeout(10000);
@@ -127,8 +127,35 @@ describe('routes', () => {
             await request(app).get(`/novel?title=${novelName}`).expect([]);
         });
 
-        it.todo('should return some novel');
+        it('should return some novel', async () => {
+            const novelName = 'one';
 
-        it.todo('should return a novel list sorted by latest chapter');
+            const response = (
+                await request(app).get(`/novel?title=${novelName}`)
+            ).body;
+
+            expect(!Object.keys(response).length).toBe(false);
+        });
+
+        it('should return a novel list sorted by latest chapter', async () => {
+            const novelName = 'one';
+
+            const response = (
+                await request(app).get(
+                    `/novel?title=${novelName}&orderByLatestChapter=true`
+                )
+            ).body;
+
+            let check = false;
+
+            for (let i = 1; i < response.length; i++) {
+                if (response[i].latestChapter > response[i - 1].latestChapter) {
+                    check = true;
+                    break;
+                }
+            }
+
+            expect(check).toBe(false);
+        });
     });
 });

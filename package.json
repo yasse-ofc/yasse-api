@@ -17,7 +17,7 @@
         "mongodb": "^4.10.0"
     },
     "scripts": {
-        "start": "ts-node-esm -T ./src/api.ts",
+        "start": "ts-node-esm -T ./src/server.ts",
         "test": "jest --detectOpenHandles",
         "test_continuous": "jest --watchAll --detectOpenHandles"
     },

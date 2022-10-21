@@ -31,7 +31,7 @@ async function searchDB(
     collectionToSearch: 'anime' | 'manga' | 'webtoon' | 'novel',
     orderByLatestChapter?: boolean
 ) {
-    let client;
+    let client: MongoClient;
     try {
         client = await MongoClient.connect(url);
         const db = client.db(dbName);
@@ -41,7 +41,7 @@ async function searchDB(
             throw new Error('Collection not found.');
         }
 
-        const searchResult = await collection.find(
+        const searchResult = collection.find(
             { title: { $regex: `.*${title.toLowerCase()}.*` } },
             { projection: { _id: 0 } }
         );
