@@ -1,6 +1,6 @@
-import router from './routes';
+import router from './routes.js';
 import express from 'express';
-import { db, connectToDatabase } from './connect_db';
+import { db, connectToDatabase } from './connect_db.js';
 
 const PORT = 3000;
 

@@ -1,5 +1,5 @@
 import express from 'express';
-import { searchDB } from './search_db';
+import { searchDB } from './search_db.js';
 
 const router = express.Router();
 

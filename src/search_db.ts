@@ -1,4 +1,4 @@
-import { db } from './connect_db';
+import { db } from './connect_db.js';
 
 /**
  * Creates ideal string to make regex search in MongoDB.
