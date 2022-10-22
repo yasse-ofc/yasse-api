@@ -181,7 +181,9 @@ cd yasse-api && npm i && touch .env
 Set up `.env` file inside the `backend` folder as following:
 
 ```.env
+MONGODB_DB=
 MONGODB_LINK=
+API_PORT=
 ```
 
 For the database, we are using [MongoDB](https://www.mongodb.com/). It's free, and the step by step to get your link is the following:
