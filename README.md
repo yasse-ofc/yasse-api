@@ -1,4 +1,4 @@
-# YASSE API <!-- omit in toc -->
+# Yasse API <!-- omit in toc -->
 
 ---
 
@@ -15,7 +15,7 @@ A free RESTful API to search series (manga, anime, webtoons and novels) from a l
   - [Example input](#example-input)
   - [Example output](#example-output)
 - [Demo](#demo)
-- [Want to contribute with YASSE?](#want-to-contribute-with-yasse)
+- [Want to contribute to Yasse?](#want-to-contribute-to-yasse)
 
 ---
 
@@ -69,8 +69,8 @@ WIP
 
 ---
 
-## Want to contribute with YASSE?
+## Want to contribute to Yasse?
 
-[Read this](./CONTRIBUTING.md) and follow our [Code of Conduct](./CODE_OF_CONDUCT.md).
+[Read this](https://github.com/yasse-ofc/.github/blob/main/CONTRIBUTING.md) and follow our [Code of Conduct](https://github.com/yasse-ofc/.github/blob/main/CODE_OF_CONDUCT.md).
 
 ---
