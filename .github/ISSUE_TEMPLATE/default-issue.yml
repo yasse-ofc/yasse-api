@@ -1,0 +1,36 @@
+# Layout adapted from https://github.com/ppy/osu/blob/master/.github/ISSUE_TEMPLATE/bug-issue.yml
+
+name: Default Issue
+description: Report an issue.
+body:
+    - type: markdown
+      attributes:
+          value: |
+              # Yasse API issue
+
+              Important to note that your issue may have already been reported before. Please check:
+              - Pinned issues, at the top of https://github.com/yasse-ofc/yasse-api/issues.
+              - And most importantly, search for your issue in the [issue listing](https://github.com/yasse-ofc/yasse-api/issues). If you find that it already exists, respond with a reaction or add any further information that may be helpful.
+    - type: dropdown
+      attributes:
+          label: Type
+          options:
+              - Enhancement
+              - Documentation
+              - Question
+              - Other
+      validations:
+          required: true
+    - type: textarea
+      attributes:
+          label: Issue description
+          description: What is this issue about? Describe it as clearly as possible.
+      validations:
+          required: true
+    - type: textarea
+      attributes:
+          label: Screenshots or videos
+          description: Add screenshots or videos related to the issue.
+          placeholder: Drag and drop the screenshots/videos into this box.
+      validations:
+          required: false
