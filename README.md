@@ -9,6 +9,11 @@ A free RESTful API to search series (manga, anime, webtoons and novels) from a l
 ## Table of Contents <!-- omit in toc -->
 
 - [How to use the API](#how-to-use-the-api)
+  - [API link](#api-link)
+  - [Routes](#routes)
+  - [Query Options](#query-options)
+  - [Example input](#example-input)
+  - [Example output](#example-output)
 - [Demo](#demo)
 - [Want to contribute with YASSE?](#want-to-contribute-with-yasse)
 
@@ -16,7 +21,11 @@ A free RESTful API to search series (manga, anime, webtoons and novels) from a l
 
 ## How to use the API
 
-WIP
+### API link
+
+`https://yasse-api.fly.dev`
+
+### Routes
 
 |  Routes  | Output  |
 | :------: | :-----: |
@@ -25,13 +34,18 @@ WIP
 | /webtoon | Webtoon |
 |  /novel  |  Novel  |
 
-Query Options:
+### Query Options
 
--   `title`: series title to search
--   `OrderByLatestChapter`: order by latest chapter
--   \[TODO\] `orderBy`: order by one of the following: TITLE, LATEST_CHAPTER, SOURCE
+- `title <string>` : series title to search
+- `OrderByLatestChapter <true or false>` : order by latest chapter
+- [TODO] `random <true or false>` : get random chapter
+- [TODO] `source <string>` : get series from an specific source
 
-Example output:
+### Example input
+
+`https://yasse-api.fly.dev/manga?title=chainsaw&orderByLatestChapter=true`
+
+### Example output
 
 ```js
 [
