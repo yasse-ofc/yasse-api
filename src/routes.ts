@@ -1,8 +1,10 @@
 import express from 'express';
+import cors from 'cors';
 import { searchDB } from './search_db.js';
 
 const router = express.Router();
 
+router.use(cors());
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
