@@ -23,7 +23,7 @@ A free RESTful API to search series (manga, anime, webtoons and novels) from a l
 
 ### API link
 
-`https://yasse-api.fly.dev`
+`https://yasse.live`
 
 ### Routes
 
@@ -43,7 +43,7 @@ A free RESTful API to search series (manga, anime, webtoons and novels) from a l
 
 ### Example input
 
-`https://yasse-api.fly.dev/manga?title=chainsaw&orderByLatestChapter=true`
+`https://yasse.live/manga?title=chainsaw&orderByLatestChapter=true`
 
 ### Example output
 
