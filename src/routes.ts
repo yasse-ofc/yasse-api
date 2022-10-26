@@ -13,11 +13,13 @@ router.use(express.urlencoded({ extended: true }));
 router.get('/anime', async (req, res) => {
     const title = req.query.title ?? '';
     const orderByLatestChapter = req.query.orderByLatestChapter ?? false;
+    const source = req.query.source ?? '';
 
     await tryToGetFromDb(
         title.toString(),
         'anime',
         !!orderByLatestChapter,
+        source.toString(),
         res
     );
 });
@@ -25,11 +27,13 @@ router.get('/anime', async (req, res) => {
 router.get('/manga', async (req, res) => {
     const title = req.query.title ?? '';
     const orderByLatestChapter = req.query.orderByLatestChapter;
+    const source = req.query.source ?? '';
 
     await tryToGetFromDb(
         title.toString(),
         'manga',
         !!orderByLatestChapter,
+        source.toString(),
         res
     );
 });
@@ -37,11 +41,13 @@ router.get('/manga', async (req, res) => {
 router.get('/webtoon', async (req, res) => {
     const title = req.query.title ?? '';
     const orderByLatestChapter = req.query.orderByLatestChapter;
+    const source = req.query.source ?? '';
 
     await tryToGetFromDb(
         title.toString(),
         'webtoon',
         !!orderByLatestChapter,
+        source.toString(),
         res
     );
 });
@@ -49,11 +55,13 @@ router.get('/webtoon', async (req, res) => {
 router.get('/novel', async (req, res) => {
     const title = req.query.title ?? '';
     const orderByLatestChapter = req.query.orderByLatestChapter;
+    const source = req.query.source ?? '';
 
     await tryToGetFromDb(
         title.toString(),
         'novel',
         !!orderByLatestChapter,
+        source.toString(),
         res
     );
 });
@@ -71,10 +79,16 @@ async function tryToGetFromDb(
     title: string,
     seriesType: string,
     orderByLatestChapter: boolean,
+    source: string,
     res
 ) {
     try {
-        const result = await searchDB(title, seriesType, orderByLatestChapter);
+        const result = await searchDB(
+            title,
+            seriesType,
+            orderByLatestChapter,
+            source
+        );
 
         if (result && result.length > 0) return res.status(200).send(result);
         return res.status(404).send({

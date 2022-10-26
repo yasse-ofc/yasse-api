@@ -23,7 +23,8 @@ function formatSearch(searchTerm: string): string {
 async function searchDB(
     title: string,
     collectionToSearch: string,
-    orderByLatestChapter?: boolean
+    orderByLatestChapter: boolean,
+    source?: string
 ) {
     try {
         const collection = db.db.collection(collectionToSearch);
@@ -33,7 +34,10 @@ async function searchDB(
         }
 
         const searchResult = collection.find(
-            { title: { $regex: `.*${title.toLowerCase()}.*` } },
+            {
+                title: { $regex: `.*${title.toLowerCase()}.*` },
+                source: { $regex: `.*${source.toLowerCase()}.*` },
+            },
             { projection: { _id: 0 } }
         );
 
