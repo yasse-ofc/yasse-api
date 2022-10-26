@@ -22,7 +22,7 @@ function formatSearch(searchTerm: string): string {
  */
 async function searchDB(
     title: string,
-    collectionToSearch: 'anime' | 'manga' | 'webtoon' | 'novel',
+    collectionToSearch: string,
     orderByLatestChapter?: boolean
 ) {
     try {

@@ -14,73 +14,86 @@ router.get('/anime', async (req, res) => {
     const title = req.query.title ?? '';
     const orderByLatestChapter = req.query.orderByLatestChapter ?? false;
 
-    try {
-        const result = await searchDB(title.toString(), 'anime', !!orderByLatestChapter);
-        if (result && result.length > 0) {
-            return res.status(200).send(result);
-        } else if (result && result.length === 0) {
-            return res.status(404).send('Not found');
-        }
-    } catch (error) {
-        return res.status(500).send('Internal server error');
-    }
+    await tryToGetFromDb(
+        title.toString(),
+        'anime',
+        !!orderByLatestChapter,
+        res
+    );
 });
 
 router.get('/manga', async (req, res) => {
     const title = req.query.title ?? '';
     const orderByLatestChapter = req.query.orderByLatestChapter;
 
-    try {
-        const result = await searchDB(title.toString(), 'manga', !!orderByLatestChapter);
-        if (result && result.length > 0) {
-            return res.status(200).send(result);
-        } else if (result && result.length === 0) {
-            return res.status(404).send('Not found');
-        }
-    } catch (error) {
-        return res.status(500).send('Internal server error');
-    }
+    await tryToGetFromDb(
+        title.toString(),
+        'manga',
+        !!orderByLatestChapter,
+        res
+    );
 });
 
 router.get('/webtoon', async (req, res) => {
     const title = req.query.title ?? '';
     const orderByLatestChapter = req.query.orderByLatestChapter;
 
-    try {
-        const result = await searchDB(title.toString(), 'webtoon', !!orderByLatestChapter);
-        if (result && result.length > 0) {
-            return res.status(200).send(result);
-        } else if (result && result.length === 0) {
-            return res.status(404).send('Not found');
-        }
-    } catch (error) {
-        return res.status(500).send('Internal server error');
-    }
+    await tryToGetFromDb(
+        title.toString(),
+        'webtoon',
+        !!orderByLatestChapter,
+        res
+    );
 });
 
 router.get('/novel', async (req, res) => {
     const title = req.query.title ?? '';
     const orderByLatestChapter = req.query.orderByLatestChapter;
 
-    try {
-        const result = await searchDB(title.toString(), 'novel', !!orderByLatestChapter);
-        if (result && result.length > 0) {
-            return res.status(200).send(result);
-        } else if (result && result.length === 0) {
-            return res.status(404).send('Not found');
-        }
-    } catch (error) {
-        return res.status(500).send('Internal server error');
-    }
+    await tryToGetFromDb(
+        title.toString(),
+        'novel',
+        !!orderByLatestChapter,
+        res
+    );
 });
 
 // Error Handling
 
+/**
+ * @param {string} title - Title to search in DB.
+ * @param {string} seriesType - Type of series to search for.
+ * @param {boolean} orderByLatestChapter -Order result or not.
+ * @param res - Response object.
+ * @returns response with status code and result
+ */
+async function tryToGetFromDb(
+    title: string,
+    seriesType: string,
+    orderByLatestChapter: boolean,
+    res
+) {
+    try {
+        const result = await searchDB(title, seriesType, orderByLatestChapter);
+
+        if (result && result.length > 0) return res.status(200).send(result);
+        return res.status(404).send({
+            status: res.statusCode,
+            message: '[NOT FOUND] Please check for any typos in your request!',
+        });
+    } catch {
+        return res.status(500).send({
+            status: res.statusCode,
+            message:
+                '[INTERNAL SERVER ERROR] Please try again (if this persists, report this issue)!',
+        });
+    }
+}
+
 router.use((_req, res, _next) => {
-    res.status(400);
-    res.send({
+    res.status(400).send({
         status: res.statusCode,
-        message: 'Please check for any errors in your request!',
+        message: '[BAD REQUEST] Please check for any errors in your request!',
     });
 });
 
