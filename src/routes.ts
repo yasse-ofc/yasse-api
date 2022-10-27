@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { searchDB } from './search_db.js';
+import type { Response } from 'express-serve-static-core';
 
 const router = express.Router();
 
@@ -10,60 +11,17 @@ router.use(express.urlencoded({ extended: true }));
 
 // Routes by series type
 
-router.get('/anime', async (req, res) => {
-    const title = req.query.title ?? '';
-    const orderByLatestChapter = req.query.orderByLatestChapter ?? false;
-    const source = req.query.source ?? '';
+const routes = ['anime', 'manga', 'webtoon', 'novel'];
 
-    await tryToGetFromDb(
-        title.toString(),
-        'anime',
-        !!orderByLatestChapter,
-        source.toString(),
-        res
-    );
-});
+routes.forEach((route) => {
+    router.get(`/${route}`, async (req, res) => {
+        const title: string = req.query.title?.toString() ?? '';
+        const orderByLatestChapter: boolean =
+            !!req.query.orderByLatestChapter ?? false;
+        const source: string = req.query.source?.toString() ?? '';
 
-router.get('/manga', async (req, res) => {
-    const title = req.query.title ?? '';
-    const orderByLatestChapter = req.query.orderByLatestChapter;
-    const source = req.query.source ?? '';
-
-    await tryToGetFromDb(
-        title.toString(),
-        'manga',
-        !!orderByLatestChapter,
-        source.toString(),
-        res
-    );
-});
-
-router.get('/webtoon', async (req, res) => {
-    const title = req.query.title ?? '';
-    const orderByLatestChapter = req.query.orderByLatestChapter;
-    const source = req.query.source ?? '';
-
-    await tryToGetFromDb(
-        title.toString(),
-        'webtoon',
-        !!orderByLatestChapter,
-        source.toString(),
-        res
-    );
-});
-
-router.get('/novel', async (req, res) => {
-    const title = req.query.title ?? '';
-    const orderByLatestChapter = req.query.orderByLatestChapter;
-    const source = req.query.source ?? '';
-
-    await tryToGetFromDb(
-        title.toString(),
-        'novel',
-        !!orderByLatestChapter,
-        source.toString(),
-        res
-    );
+        await tryToGetFromDb(title, route, orderByLatestChapter, source, res);
+    });
 });
 
 // Error Handling
@@ -80,7 +38,7 @@ async function tryToGetFromDb(
     seriesType: string,
     orderByLatestChapter: boolean,
     source: string,
-    res
+    res: Response<any, Record<string, any>, number>
 ) {
     try {
         const result = await searchDB(

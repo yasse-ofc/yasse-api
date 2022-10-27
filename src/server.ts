@@ -19,7 +19,7 @@ connectToDatabase()
         });
 
         process.on('exit', async () => {
-            db.client.close();
+            db.client?.close();
             server.close(() => {
                 console.log('API closed');
             });

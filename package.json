@@ -30,6 +30,7 @@
     ],
     "type": "module",
     "devDependencies": {
+        "@types/cors": "^2.8.12",
         "@types/express": "^4.17.14",
         "dotenv": "^16.0.3",
         "prettier": "2.7.1",

@@ -24,10 +24,10 @@ async function searchDB(
     title: string,
     collectionToSearch: string,
     orderByLatestChapter: boolean,
-    source?: string
+    source: string
 ) {
     try {
-        const collection = db.db.collection(collectionToSearch);
+        const collection = db.db?.collection(collectionToSearch);
 
         if (!collection) {
             throw new Error('Collection not found.');
