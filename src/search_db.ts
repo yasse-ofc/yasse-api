@@ -17,7 +17,8 @@ function formatSearch(searchTerm: string): string {
  * Searches for title in collectionToSearch.
  * @param {string} title - Term to be searched.
  * @param {string} collectionToSearch - Collection to search.
- * @param {boolean} [orderByLatestChapter] - Order search or not.
+ * @param {boolean} orderByLatestChapter - Order search or not.
+ * @param {string} source - Search in specific source.
  * @return List of JSON document with search results.
  */
 async function searchDB(

@@ -31,7 +31,7 @@ routes.forEach((route) => {
  * @param {string} seriesType - Type of series to search for.
  * @param {boolean} orderByLatestChapter -Order result or not.
  * @param res - Response object.
- * @returns response with status code and result
+ * @returns response with status code and message or result.
  */
 async function tryToGetFromDb(
     title: string,
@@ -49,6 +49,7 @@ async function tryToGetFromDb(
         );
 
         if (result && result.length > 0) return res.status(200).send(result);
+
         return res.status(404).send({
             status: res.statusCode,
             message: '[NOT FOUND] Please check for any typos in your request!',
