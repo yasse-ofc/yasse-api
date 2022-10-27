@@ -37,17 +37,20 @@ A free RESTful API to search series (manga, anime, webtoons and novels) from a l
 ### Query Options
 
 - `title <string>` : series title to search
-- `OrderByLatestChapter <true or false>` : order by latest chapter
+- `OrderByLatestChapter <boolean>` : order by latest chapter
+- `source <string>` : get series from an specific source
 - [TODO] `random <true or false>` : get random chapter
-- [TODO] `source <string>` : get series from an specific source
 
 ### Example input
 
-`https://yasse.live/manga?title=chainsaw&orderByLatestChapter=true`
+```ts
+fetch('https://yasse.live/manga?title=chainsaw&orderByLatestChapter=true')
+    .then(response => response.json())
+```
 
 ### Example output
 
-```js
+```ts
 [
     ...,
     {
