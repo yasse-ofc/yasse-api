@@ -48,7 +48,7 @@ async function searchDB(
 
 		if (isRandom) {
 			result = await searchResult.toArray();
-			result = result[Math.floor(Math.random() * result.length)];
+			result = [result[Math.floor(Math.random() * result.length)]];
 		} else if (orderByLatestChapter) {
 			result = await searchResult.sort({ latestChapter: -1 }).toArray();
 		} else {

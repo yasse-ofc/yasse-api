@@ -59,7 +59,7 @@ async function tryToGetFromDb(
 			isRandom,
 		);
 
-		if (result) {
+		if (result && result.length > 0) {
 			return res.status(200).send(result);
 		}
 
