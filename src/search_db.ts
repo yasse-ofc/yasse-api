@@ -1,4 +1,4 @@
-import { db } from './connect_db.js';
+import { db } from "./connect_db.js";
 
 /**
  * Creates ideal string to make regex search in MongoDB.
@@ -6,11 +6,11 @@ import { db } from './connect_db.js';
  * @return {string} Formatted string.
  */
 function formatSearch(searchTerm: string): string {
-    if (typeof searchTerm !== 'string') {
-        throw new Error('Search term must be a string.');
-    }
+	if (typeof searchTerm !== "string") {
+		throw new Error("Search term must be a string.");
+	}
 
-    return searchTerm.split('').join('.*');
+	return searchTerm.split("").join(".*");
 }
 
 /**
@@ -22,34 +22,34 @@ function formatSearch(searchTerm: string): string {
  * @return List of JSON document with search results.
  */
 async function searchDB(
-    title: string,
-    collectionToSearch: string,
-    orderByLatestChapter: boolean,
-    source: string
+	title: string,
+	collectionToSearch: string,
+	orderByLatestChapter: boolean,
+	source: string,
 ) {
-    try {
-        const collection = db.db?.collection(collectionToSearch);
+	try {
+		const collection = db.db?.collection(collectionToSearch);
 
-        if (!collection) {
-            throw new Error('Collection not found.');
-        }
+		if (!collection) {
+			throw new Error("Collection not found.");
+		}
 
-        const searchResult = collection.find(
-            {
-                title: { $regex: `.*${title.toLowerCase()}.*` },
-                source: { $regex: `.*${source.toLowerCase()}.*` },
-            },
-            { projection: { _id: 0 } }
-        );
+		const searchResult = collection.find(
+			{
+				title: { $regex: `.*${title.toLowerCase()}.*` },
+				source: { $regex: `.*${source.toLowerCase()}.*` },
+			},
+			{ projection: { _id: 0 } },
+		);
 
-        const result = orderByLatestChapter
-            ? await searchResult.sort({ latestChapter: -1 }).toArray()
-            : await searchResult.toArray();
+		const result = orderByLatestChapter
+			? await searchResult.sort({ latestChapter: -1 }).toArray()
+			: await searchResult.toArray();
 
-        return result;
-    } catch (error) {
-        console.error(error);
-    }
+		return result;
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 export { formatSearch, searchDB };
