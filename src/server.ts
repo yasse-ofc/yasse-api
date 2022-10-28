@@ -1,6 +1,7 @@
 import router from "./routes.js";
 import express from "express";
 import * as dotenv from "dotenv";
+import compression from "compression";
 import { db, connectToDatabase } from "./connect_db.js";
 
 dotenv.config();
@@ -13,6 +14,7 @@ connectToDatabase()
 		const app = express();
 
 		app.use("/", router);
+		app.use(compression());
 		app.set("query parser", "simple");
 
 		const server = app.listen(DEFAULT_PORT || FALLBACK_PORT, () => {
