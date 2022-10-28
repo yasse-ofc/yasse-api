@@ -18,8 +18,16 @@ routes.forEach((route) => {
 		const title: string = req.query.title?.toString() ?? "";
 		const orderByLatestChapter: boolean = !req.query.orderByLatestChapter;
 		const source: string = req.query.source?.toString() ?? "";
+		const isRandom: boolean = !req.query.isRandom;
 
-		await tryToGetFromDb(title, route, !orderByLatestChapter, source, res);
+		await tryToGetFromDb(
+			title,
+			route,
+			!orderByLatestChapter,
+			source,
+			!isRandom,
+			res,
+		);
 	});
 });
 
@@ -29,6 +37,8 @@ routes.forEach((route) => {
  * @param {string} title - Title to search in DB.
  * @param {string} seriesType - Type of series to search for.
  * @param {boolean} orderByLatestChapter -Order result or not.
+ * @param {string} source - Search in specific source.
+ * @param {boolean} isRandom - Randomize result or not.
  * @param res - Response object.
  * @returns response with status code and message or result.
  */
@@ -37,6 +47,7 @@ async function tryToGetFromDb(
 	seriesType: string,
 	orderByLatestChapter: boolean,
 	source: string,
+	isRandom: boolean,
 	res: Response<any, Record<string, any>, number>,
 ) {
 	try {
@@ -45,9 +56,10 @@ async function tryToGetFromDb(
 			seriesType,
 			orderByLatestChapter,
 			source,
+			isRandom,
 		);
 
-		if (result && result.length > 0) {
+		if (result) {
 			return res.status(200).send(result);
 		}
 

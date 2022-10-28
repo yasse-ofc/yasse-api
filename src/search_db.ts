@@ -19,6 +19,7 @@ function formatSearch(searchTerm: string): string {
  * @param {string} collectionToSearch - Collection to search.
  * @param {boolean} orderByLatestChapter - Order search or not.
  * @param {string} source - Search in specific source.
+ * @param {boolean} isRandom - Randomize result or not.
  * @return List of JSON document with search results.
  */
 async function searchDB(
@@ -26,6 +27,7 @@ async function searchDB(
 	collectionToSearch: string,
 	orderByLatestChapter: boolean,
 	source: string,
+	isRandom: boolean,
 ) {
 	try {
 		const collection = db.db?.collection(collectionToSearch);
@@ -42,9 +44,16 @@ async function searchDB(
 			{ projection: { _id: 0 } },
 		);
 
-		const result = orderByLatestChapter
-			? await searchResult.sort({ latestChapter: -1 }).toArray()
-			: await searchResult.toArray();
+		let result;
+
+		if (isRandom) {
+			result = await searchResult.toArray();
+			result = result[Math.floor(Math.random() * result.length)];
+		} else if (orderByLatestChapter) {
+			result = await searchResult.sort({ latestChapter: -1 }).toArray();
+		} else {
+			result = await searchResult.toArray();
+		}
 
 		return result;
 	} catch (error) {
