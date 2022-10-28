@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
-import { Db, MongoClient } from 'mongodb';
+import type { Db } from 'mongodb';
+import { MongoClient } from 'mongodb';
 
 export const db: { client?: MongoClient; db?: Db } = {};
 
