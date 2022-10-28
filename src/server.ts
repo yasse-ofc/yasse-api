@@ -13,6 +13,7 @@ connectToDatabase()
 		const app = express();
 
 		app.use("/", router);
+		app.set("query parser", "simple");
 
 		const server = app.listen(DEFAULT_PORT || FALLBACK_PORT, () => {
 			console.log(`Listening on port ${DEFAULT_PORT || FALLBACK_PORT}`);
