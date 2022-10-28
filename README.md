@@ -1,23 +1,21 @@
 # Yasse API <!-- omit in toc -->
 
----
-
 A free RESTful API to search series (manga, anime, webtoons and novels) from a lot of websites at once.
-
----
 
 ## Table of Contents <!-- omit in toc -->
 
 - [How to use the API](#how-to-use-the-api)
   - [API link](#api-link)
   - [Routes](#routes)
-  - [Query Options](#query-options)
+  - [Query Parameter](#query-parameter)
+  - [Sources List](#sources-list)
+    - [Manga](#manga)
+    - [Anime](#anime)
+    - [Webtoons](#webtoons)
+    - [Novels](#novels)
   - [Example input](#example-input)
   - [Example output](#example-output)
-- [Demo](#demo)
 - [Want to contribute to Yasse?](#want-to-contribute-to-yasse)
-
----
 
 ## How to use the API
 
@@ -27,19 +25,39 @@ A free RESTful API to search series (manga, anime, webtoons and novels) from a l
 
 ### Routes
 
-|  Routes  | Output  |
+| Routes   | Output  |
 | :------: | :-----: |
-|  /anime  |  Anime  |
-|  /manga  |  Manga  |
+| /anime   | Anime   |
+| /manga   | Manga   |
 | /webtoon | Webtoon |
-|  /novel  |  Novel  |
+| /novel   | Novel   |
 
-### Query Options
+### Query Parameter
 
-- `title <string>` : series title to search
-- `OrderByLatestChapter <boolean>` : order by latest chapter
-- `source <string>` : get series from an specific source
-- [TODO] `random <true or false>` : get random chapter
+| Paremeter             | Possible Values | Default value |
+| :-------------------: | :-------------: | :-----------: |
+| title                 | any string      | empty string  |
+| orderByLatestChapter  | true or false   | false         |
+| source                | any string      | empty string  |
+| random                | true or false   | false         |
+
+### Sources List
+
+#### Manga
+
+- `brmangas`
+
+#### Anime
+
+- `goyabu`
+
+#### Webtoons
+
+- `lezhinus`
+
+#### Novels
+
+- `readlightnovel`
 
 ### Example input
 
@@ -64,16 +82,6 @@ fetch('https://yasse.live/manga?title=chainsaw&orderByLatestChapter=true')
 ]
 ```
 
----
-
-## Demo
-
-WIP
-
----
-
 ## Want to contribute to Yasse?
 
 [Read this](https://github.com/yasse-ofc/.github/blob/main/CONTRIBUTING.md) and follow our [Code of Conduct](https://github.com/yasse-ofc/.github/blob/main/CODE_OF_CONDUCT.md).
-
----
