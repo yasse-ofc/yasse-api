@@ -1,5 +1,5 @@
-import express from "express";
 import cors from "cors";
+import express from "express";
 import { searchDB } from "./search_db.js";
 import type { Response } from "express-serve-static-core";
 
@@ -16,16 +16,16 @@ const routes = ["anime", "manga", "webtoon", "novel"];
 routes.forEach((route) => {
 	router.get(`/${route}`, async (req, res) => {
 		const title: string = req.query.title?.toString() ?? "";
-		const orderByLatestChapter: boolean = !req.query.orderByLatestChapter;
+		const sort: boolean = !req.query.sort;
 		const source: string = req.query.source?.toString() ?? "";
-		const isRandom: boolean = !req.query.isRandom;
+		const random: boolean = !req.query.random;
 
 		await tryToGetFromDb(
 			title,
 			route,
-			!orderByLatestChapter,
+			!sort,
 			source,
-			!isRandom,
+			!random,
 			res,
 		);
 	});
@@ -36,27 +36,27 @@ routes.forEach((route) => {
 /**
  * @param {string} title - Title to search in DB.
  * @param {string} seriesType - Type of series to search for.
- * @param {boolean} orderByLatestChapter -Order result or not.
+ * @param {boolean} sort -Sort result or not.
  * @param {string} source - Search in specific source.
- * @param {boolean} isRandom - Randomize result or not.
+ * @param {boolean} random - Randomize result or not.
  * @param res - Response object.
  * @returns response with status code and message or result.
  */
 async function tryToGetFromDb(
 	title: string,
 	seriesType: string,
-	orderByLatestChapter: boolean,
+	sort: boolean,
 	source: string,
-	isRandom: boolean,
+	random: boolean,
 	res: Response<any, Record<string, any>, number>,
 ) {
 	try {
 		const result = await searchDB(
 			title,
 			seriesType,
-			orderByLatestChapter,
+			sort,
 			source,
-			isRandom,
+			random,
 		);
 
 		if (result && result.length > 0) {
