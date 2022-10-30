@@ -34,12 +34,12 @@ A free RESTful API to search series (manga, anime, webtoons and novels) from a l
 
 ### Query Parameter
 
-| Paremeter             | Possible Values | Default value |
-| :-------------------: | :-------------: | :-----------: |
-| title                 | any string      | empty string  |
-| orderByLatestChapter  | true or false   | false         |
-| source                | any string      | empty string  |
-| random                | true or false   | false         |
+| Paremeter               | Possible Values                                                                                                                           | Default value |
+| :---------------------: | :---------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| `title`                 | any string                                                                                                                                | empty string  |
+| `sort`                  | `>chapter`: sort in descending order<br>`<chapter`: sort in ascending order<br>`>name`: sort from Z to A<br>`<name`: sort from A to Z<br> | empty string  |
+| `source`                | any string                                                                                                                                | empty string  |
+| `random`                | `true` or `false`                                                                                                                         | `false`       |
 
 ### Sources List
 
@@ -62,7 +62,7 @@ A free RESTful API to search series (manga, anime, webtoons and novels) from a l
 ### Example input
 
 ```ts
-fetch('https://yasse.live/manga?title=chainsaw&orderByLatestChapter=true')
+fetch('https://yasse.live/manga?title=chainsaw&sort=>chapter')
     .then(response => response.json())
 ```
 
