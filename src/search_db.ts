@@ -49,13 +49,21 @@ async function searchDB(
 		if (random) {
 			result = await searchResult.toArray();
 			result = [result[Math.floor(Math.random() * result.length)]];
-		} else if (sort === 'chapter') {
-			result = await searchResult.sort({ latestChapter: -1 }).toArray();
-		} else if (sort === 'name') {
-			result = await searchResult.sort({ title: 1 }).toArray();
-		} else {
-			result = await searchResult.toArray();
 		}
+
+		// Sorting in descending order
+		else if (sort === '>chapter') result = await searchResult.sort({ latestChapter: -1 }).toArray();
+		
+		// Sorting in ascending order
+		else if (sort === '<chapter') result = await searchResult.sort({ latestChapter: 1 }).toArray();
+
+		// Sorting from Z to A
+		else if (sort === '>name') result = await searchResult.sort({ title: -1 }).toArray();
+
+		// Sorting from A to Z
+		else if (sort === '<name') result = await searchResult.sort({ title: 1 }).toArray();
+
+		else result = await searchResult.toArray();
 
 		return result;
 	} catch (error) {
