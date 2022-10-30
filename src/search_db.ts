@@ -17,7 +17,7 @@ function formatSearch(searchTerm: string): string {
  * Searches for title in collectionToSearch.
  * @param {string} title - Term to be searched.
  * @param {string} collectionToSearch - Collection to search.
- * @param {boolean} sort - Sort search or not.
+ * @param {string} sort - Sort results by chapter or name.
  * @param {string} source - Search in specific source.
  * @param {boolean} random - Randomize result or not.
  * @return List of JSON document with search results.
@@ -25,7 +25,7 @@ function formatSearch(searchTerm: string): string {
 async function searchDB(
 	title: string,
 	collectionToSearch: string,
-	sort: boolean,
+	sort: string,
 	source: string,
 	random: boolean,
 ) {
@@ -49,9 +49,10 @@ async function searchDB(
 		if (random) {
 			result = await searchResult.toArray();
 			result = [result[Math.floor(Math.random() * result.length)]];
-		} else if (sort) {
-			
+		} else if (sort === 'chapter') {
 			result = await searchResult.sort({ latestChapter: -1 }).toArray();
+		} else if (sort === 'name') {
+			result = await searchResult.sort({ title: 1 }).toArray();
 		} else {
 			result = await searchResult.toArray();
 		}

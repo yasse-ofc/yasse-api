@@ -16,14 +16,14 @@ const routes = ["anime", "manga", "webtoon", "novel"];
 routes.forEach((route) => {
 	router.get(`/${route}`, async (req, res) => {
 		const title: string = req.query.title?.toString() ?? "";
-		const sort: boolean = !req.query.sort;
+		const sort: string = req.query.sort?.toString() ?? "";
 		const source: string = req.query.source?.toString() ?? "";
 		const random: boolean = !req.query.random;
 
 		await tryToGetFromDb(
 			title,
 			route,
-			!sort,
+			sort,
 			source,
 			!random,
 			res,
@@ -36,7 +36,7 @@ routes.forEach((route) => {
 /**
  * @param {string} title - Title to search in DB.
  * @param {string} seriesType - Type of series to search for.
- * @param {boolean} sort -Sort result or not.
+ * @param {string} sort -Sort results by chapter or name.
  * @param {string} source - Search in specific source.
  * @param {boolean} random - Randomize result or not.
  * @param res - Response object.
@@ -45,7 +45,7 @@ routes.forEach((route) => {
 async function tryToGetFromDb(
 	title: string,
 	seriesType: string,
-	sort: boolean,
+	sort: string,
 	source: string,
 	random: boolean,
 	res: Response<any, Record<string, any>, number>,
