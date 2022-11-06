@@ -10,11 +10,11 @@ export async function connectToDatabase() {
 	const url = process.env.MONGODB_LINK ?? "";
 	const dbName = process.env.MONGODB_DB ?? "";
 
-	const client: MongoClient = new MongoClient(url);
+	const client = new MongoClient(url);
 
 	await client.connect();
 
-	const dbLocal: Db = client.db(dbName);
+	const dbLocal = client.db(dbName);
 
 	db.db = dbLocal;
 	db.client = client;

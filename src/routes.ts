@@ -15,10 +15,10 @@ const routes = ["anime", "manga", "webtoon", "novel"];
 
 routes.forEach((route) => {
 	router.get(`/${route}`, async (req, res) => {
-		const title: string = formatText(req.query.title);
-		const sort: string = formatText(req.query.sort);
-		const source: string = formatText(req.query.source);
-		const random: boolean = !req.query.random;
+		const title = formatText(req.query.title);
+		const sort = formatText(req.query.sort);
+		const source = formatText(req.query.source);
+		const random = !req.query.random;
 
 		await tryToGetFromDb(title, route, sort, source, !random, res);
 	});
