@@ -31,7 +31,7 @@ routes.forEach((route) => {
  * @return {string} trimmed string.
  */
 function formatText(queryParameter: any): string {
-	return queryParameter.toString().trim();
+	return queryParameter ? queryParameter.toString().trim() : "";
 }
 
 // Error Handling
